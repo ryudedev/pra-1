@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # Node.js
+  next-pra:
+    build: ./nextjs
+    container_name: nextjs
+    tty: true
+    ports:
+      - 3000:3000
+    stdin_open: true
+    # プロジェクトディレクトリにマウントする
+    volumes:
+      - ./nextjs/nextjs-dashboard:/app
+    working_dir: /app/nextjs-dashboard
+    environment:
+      - WATCHPACK_POLLING=true
+    command: sh -c "npm install && npm run dev"
